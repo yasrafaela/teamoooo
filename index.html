@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Pedido</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffc0cb;
+    font-family: Arial, sans-serif;
+  }
+
+  .box {
+    text-align: center;
+  }
+
+  h1 {
+    color: black;
+  }
+
+  button {
+    margin: 10px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .sim {
+    background-color: #ff69b4;
+    color: white;
+  }
+
+  .nao {
+    background-color: white;
+    color: black;
+    position: absolute;
+  }
+
+  .heart {
+    position: absolute;
+    color: red;
+    font-size: 20px;
+    animation: subir 3s linear infinite;
+  }
+
+  @keyframes subir {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-200px);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h1>oiii amor, vc quer namorar cmg?</h1>
+  <button class="sim" onclick="respostaSim()">sim</button>
+  <button class="nao" id="nao">não</button>
+</div>
+
+<script>
+  const botaoNao = document.getElementById("nao");
+
+  botaoNao.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+
+    botaoNao.style.left = x + "px";
+    botaoNao.style.top = y + "px";
+  });
+
+  function respostaSim() {
+    // vibração (funciona em alguns celulares)
+    if (navigator.vibrate) {
+      navigator.vibrate([200, 100, 200, 100, 400]);
+    }
+
+    document.body.innerHTML = "<h1 style='color:black'>obgddd amooor, eu te amo!! da sua princesa</h1>";
+
+    setInterval(criarCoracao, 300);
+  }
+
+  function criarCoracao() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText = "❤";
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = window.innerHeight + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
